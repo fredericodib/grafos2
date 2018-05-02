@@ -1,15 +1,16 @@
 /*
 Trabalho 2 de Grafos 1/2018
-Alunos: Frederico Pinheiro Dib	15/0125925
-		Amanda Oliveira Alves   15/0116276
+Alunos: 
+Frederico Pinheiro Dib	15/0125925
+Amanda Oliveira Alves   15/0116276
 
 Como compilar:
 $ gcc -ansi -Wall -o main main.c -lm
 $ ./main > ordenacao.txt
 O resultado das ordenações estará registrado no arquivo ordenacao.txt
-O resultado de tempo sairá no Arquivo time.txt
+O resultado de tempo de execução de cada ordenação estará disponível no arquivo time.txt
 
-Os dois arquivos Já estão gerados!
+Os dois arquivos já foram gerados!
 */
 
 #include <stdio.h>
@@ -22,6 +23,7 @@ Os dois arquivos Já estão gerados!
 #include "ordenacao_dfs.c"
 
 
+/* Essa função constrói um grafo a partir da leitura de um arquivo texto */
 void constroi_grafo(GRAFO *grafo, char *name) {
 	int n_vertice, vertice, target, grau, i, count;
 	FILE *arq;
@@ -64,18 +66,20 @@ void constroi_grafo(GRAFO *grafo, char *name) {
 }
 
 
-
+/* Main */
 int main() {
 	clock_t start_t, end_t, total_t;
 	
 	FILE *data;
-	data = fopen("time.txt", "w");
+	data = fopen("time.txt", "w"); /* Abre arquivo time.txt */
 
 	GRAFO small_g;
 	GRAFO med_g;
 	GRAFO large_g;
 	GRAFO huge_g;
 
+	/* Para cada grafo gerado ocorrem dois tipos de ordenação topológica, uma feita com o algoritmo de Kahn e a outra usando DFS. E também é medido o tempo de execução em clocks para cada uma das ordenações executadas. */
+	/* A fonte dos algoritmos utilizados para fazer esse trabalho foram os slides disponibilizados pelo professor na plataforma Aprender. */
 	constroi_grafo(&small_g, "top_small.txt");
 	printf("Ordenação do grafo construido a partir do arquivo top_small.txt\nA ordenação utilizada foi a de Kahn\n\n");
 	
@@ -154,9 +158,10 @@ int main() {
 	end_t = clock();
 	total_t = (end_t - start_t);
    	fprintf(data,"Algoritmo de DFS, para 100000 vertices, levou %ld Clocks\n", total_t);
-   	fprintf(data,"Como é possivel perceber, o algoritmo de ordenação topologica por DFS possui um desempenho muito maior que o algoritmo de Kahn\n");
-   	fprintf(data,"Quando o grafo é pequeno a diferença é inperceptível, mas ao analisar grafos grandes, percebemos a diferença no desempenho\n");
-
+   	fprintf(data,"Como é possivel perceber, o algoritmo de ordenação topológica por DFS possui um desempenho muito melhor do que o algoritmo de Kahn, no grafo com 100 vértices já é possível perceber uma grande diferença no tempo de execução entre os dois. Portanto o algoritmo de Kahn talvez só seja recomendado para o caso que o grafo possui 10 vértices.\n");
+   	fprintf(data,"Quando o grafo é pequeno a diferença é desprezível, porém a medida que o número de vértices aumenta, percebemos a mudança no desempenho das ordenações.\n");
+   	fprintf(data,"Portanto para grafos com muitos vértices é recomendado que utilize a ordenação com DFS.\n");
+   	fprintf(data,"A fonte dos algoritmos utilizados para fazer esse trabalho foram os slides disponibilizados pelo professor na plataforma Aprender.\n");
 	printf("\n");
 
 	return 0;

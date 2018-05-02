@@ -1,4 +1,4 @@
-
+/* Nesse arquivo estão as funções usadas para a ordenação através do algoritmo de Kahn */
 void grau_entrada(int *vetor, GRAFO grafo) {
 	int i, j;
 
@@ -15,6 +15,7 @@ void grau_entrada(int *vetor, GRAFO grafo) {
 
 }
 
+/* Checa se um vértice já foi visitado */
 int checa_marcado(int *vetor, int tam, int valor) {
 	int i;
 
@@ -27,6 +28,7 @@ int checa_marcado(int *vetor, int tam, int valor) {
 	return 1;
 }
 
+/* Executa a ordenação de Kahn */
 void ordenacao_kahn(GRAFO grafo) {
 	int *vetor_entrada, *ordenacao, i, j, count=0, k=0;
 

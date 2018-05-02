@@ -1,4 +1,4 @@
-
+/* Nesse arquivo estão as funções utilizadas para fazer a ordenação usando DFS */
 void inicia_pilha(PILHA *pilha) {
 	pilha->inicio = NULL;
 }
@@ -35,13 +35,13 @@ NODE *pop(PILHA *pilha) {
 }
 
 
-
+/* Faz a ordenação topológica do grafo recebido */
 void ordenacao_dfs(GRAFO grafo) {
 	int *vetor_status, i, id_aux, count, j;
 	NODE *node;
 	PILHA p, resultado;
 
-	/*0 = Não visitado, 1 = Empilhado*/
+	/*0 = não visitado, 1 = empilhado*/
 	vetor_status = malloc (grafo.nvertices * sizeof (int));
 
 	for (i=0;i<grafo.nvertices;i++) {
