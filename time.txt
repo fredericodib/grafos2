@@ -1,0 +1,10 @@
+Algoritmo de Kahn, para 10 vertices, levou 14 Clocks
+Algoritmo de DFS, para 10 vertices, levou 7 Clocks
+Algoritmo de Kahn, para 100 vertices, levou 195 Clocks
+Algoritmo de DFS, para 100 vertices, levou 50 Clocks
+Algoritmo de Kahn, para 10000 vertices, levou 846365 Clocks
+Algoritmo de DFS, para 10000 vertices, levou 2333 Clocks
+Algoritmo de Kahn, para 100000 vertices, levou 256215074 Clocks
+Algoritmo de DFS, para 100000 vertices, levou 27306 Clocks
+Como é possivel perceber, o algoritmo de ordenação topologica por DFS possui um desempenho muito maior que o algoritmo de Kahn
+Quando o grafo é pequeno a diferença é inperceptível, mas ao analisar grafos grandes, percebemos a diferença no desempenho
