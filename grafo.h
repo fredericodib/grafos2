@@ -9,7 +9,7 @@ typedef struct {
   int id;			/* Id do vértice */
 } VERTEX;
 
-/* Struct que defone a estrutura de um grafo */
+/* Struct que define a estrutura de um grafo */
 typedef struct {
 	int nvertices; /* Número de vértices */
 	VERTEX *vertex;
