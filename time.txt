@@ -1,12 +1,12 @@
-Algoritmo de Kahn, para 10 vertices, levou 36 Clocks
-Algoritmo de DFS, para 10 vertices, levou 12 Clocks
-Algoritmo de Kahn, para 100 vertices, levou 372 Clocks
-Algoritmo de DFS, para 100 vertices, levou 18 Clocks
-Algoritmo de Kahn, para 10000 vertices, levou 695158 Clocks
-Algoritmo de DFS, para 10000 vertices, levou 1877 Clocks
-Algoritmo de Kahn, para 100000 vertices, levou 210746951 Clocks
-Algoritmo de DFS, para 100000 vertices, levou 19475 Clocks
-Como é possivel perceber, o algoritmo de ordenação topológica por DFS possui um desempenho muito melhor do que o algoritmo de Kahn, no grafo com 100 vértices já é possível perceber uma grande diferença no tempo de execução entre os dois. Portanto o algoritmo de Kahn talvez só seja recomendado para o caso que o grafo possui 10 vértices.
-Quando o grafo é pequeno a diferença é aceitável, porém a medida que o número de vértices aumenta, percebemos a mudança no desempenho das ordenações.
+Algoritmo de Kahn, para 10 vertices, levou 7 Clocks
+Algoritmo de DFS, para 10 vertices, levou 3 Clocks
+Algoritmo de Kahn, para 100 vertices, levou 118 Clocks
+Algoritmo de DFS, para 100 vertices, levou 19 Clocks
+Algoritmo de Kahn, para 10000 vertices, levou 696946 Clocks
+Algoritmo de DFS, para 10000 vertices, levou 1698 Clocks
+Algoritmo de Kahn, para 100000 vertices, levou 210825177 Clocks
+Algoritmo de DFS, para 100000 vertices, levou 19210 Clocks
+Como é possivel perceber, o algoritmo de ordenação topológica por DFS possui um desempenho muito melhor do que o algoritmo de Kahn.
+Quando o grafo é pequeno a diferença é desprezível, porém a medida que o número de vértices aumenta, percebemos a mudança no desempenho das ordenações.
 Portanto para grafos com muitos vértices é recomendado que utilize a ordenação com DFS.
 A fonte dos algoritmos utilizados para fazer esse trabalho foram os slides disponibilizados pelo professor na plataforma Aprender.
