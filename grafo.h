@@ -26,3 +26,8 @@ typedef struct Node NODE;
 typedef struct {
 	NODE *inicio;
 } PILHA;
+
+typedef struct {
+	NODE *inicio;
+	NODE *fim;
+} FILA;

@@ -36,7 +36,7 @@ NODE *pop(PILHA *pilha) {
 
 
 /* Faz a ordenação topológica do grafo recebido */
-void ordenacao_dfs(GRAFO grafo) {
+void ordenacao_dfs(GRAFO grafo, FILE *ordenacao_file) {
 	int *vetor_status, i, id_aux, count, j;
 	NODE *node;
 	PILHA p, resultado;
@@ -76,9 +76,9 @@ void ordenacao_dfs(GRAFO grafo) {
 
 	for(i=0;i<grafo.nvertices;i++) {
 		node = pop(&resultado);
-		printf("%d ", node->vertex.id);
+		fprintf(ordenacao_file, "%d ", node->vertex.id);
 	}
-	printf("\n");
+	fprintf(ordenacao_file, "\n");
 	
 
 }

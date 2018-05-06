@@ -1,5 +1,59 @@
 /* Nesse arquivo estão as funções usadas para a ordenação através do algoritmo de Kahn */
-void grau_entrada(int *vetor, GRAFO grafo) {
+
+
+/*Estrutura da fila*/
+void inicia_fila(FILA *fila) {
+	fila->inicio = NULL;
+	fila->fim = NULL;
+}
+
+NODE *pusher_fila(){
+   NODE *new = (NODE*) malloc(sizeof(NODE));
+   return new;
+}
+
+void enfilera(FILA *fila, VERTEX vertice) {
+	NODE *node = pusher_fila();
+	NODE *aux_node;
+
+	node->vertex = vertice;
+	if (fila->inicio != NULL) {
+		aux_node = fila->inicio;
+		while(aux_node->prox != NULL) {
+			aux_node = aux_node->prox;
+		}
+		aux_node->prox = node;
+	}
+	else {
+		fila->inicio = node;
+	}
+	
+	node->prox = NULL;
+	fila->fim = node;
+}
+
+NODE *desenfilera(FILA *fila) {
+	NODE *node;
+
+	if (fila->inicio == NULL) {
+		return NULL;
+	}
+
+	node = fila->inicio;
+	if (fila->inicio->prox == NULL) {
+		fila->inicio = NULL;
+		fila->fim = NULL;
+	}
+	else {
+		fila->inicio = fila->inicio->prox;
+	}
+	
+
+	return node;
+}
+
+/*Função que cria um vetor em que cada indice representa o vertice, e o valor é o grau de entrada*/
+void grau_entrada(int *vetor, GRAFO grafo, FILA *S) {
 	int i, j;
 
 	for (i=0;i<grafo.nvertices;i++) {
@@ -12,50 +66,37 @@ void grau_entrada(int *vetor, GRAFO grafo) {
 		}
 	}
 
-
-}
-
-/* Checa se um vértice já foi visitado */
-int checa_marcado(int *vetor, int tam, int valor) {
-	int i;
-
-	for(i=0;i<tam;i++) {
-		if(vetor[i] == valor) {
-			return 0;
+	for(i=0;i<grafo.nvertices;i++) {
+		if (vetor[i] == 0) {
+			enfilera(S, grafo.vertex[i]);
 		}
 	}
-
-	return 1;
 }
+
 
 /* Executa a ordenação de Kahn */
-void ordenacao_kahn(GRAFO grafo) {
-	int *vetor_entrada, *ordenacao, i, j, count=0, k=0;
+void ordenacao_kahn(GRAFO grafo, FILE *ordenacao_file) {
+	int *vetor_entrada, i, j, id;
+	FILA S;
+	NODE *node;
+
+	inicia_fila(&S);
 
 	vetor_entrada = malloc (grafo.nvertices * sizeof (int));
+	grau_entrada(vetor_entrada, grafo, &S);
 
-	ordenacao = malloc (grafo.nvertices * sizeof (int));
-	grau_entrada(vetor_entrada, grafo);
+	while(S.inicio != NULL) {
+		node = desenfilera(&S);
+		fprintf(ordenacao_file, "%d ", node->vertex.id);
 
-	while((count < grafo.nvertices) && (k < grafo.nvertices)) {
-		for(i=0;i<grafo.nvertices;i++) {
-			if ((vetor_entrada[i] == 0) && checa_marcado(ordenacao, count, i)) {
-				ordenacao[count] = i;
-				count++;
-
-				for(j=0;j<grafo.vertex[i].degree;j++) {
-					vetor_entrada[grafo.vertex[i].edge[j]]--;
-				}
+		id = node->vertex.id;
+		for(i=0;i<grafo.vertex[id].degree;i++) {
+			j = grafo.vertex[id].edge[i];
+			vetor_entrada[j]--;
+			if (vetor_entrada[j] == 0) {
+				enfilera(&S, grafo.vertex[j]);
 			}
 		}
-		k++;
 	}
-
-
-
-	for(i=0;i<grafo.nvertices;i++) {
-		printf("%d ", ordenacao[i]);
-	}
-	printf("\n");
-	
+	fprintf(ordenacao_file, "\n");
 }
