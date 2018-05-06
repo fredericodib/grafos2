@@ -14,6 +14,7 @@ O resultado de tempo de execução de cada ordenação estará disponível no ar
 Para gera o grafico digite:
 $ gcc gnuplot_graph.c -o gnuplot_graph
 ./gnuplot_graph
+Será aberto 3 graficos, O grafico do DFS, grafico do Khan, e os dois juntos
 
 Os dois arquivos já foram gerados!
 */
@@ -138,6 +139,7 @@ int main() {
 	printf("O relatorio do tempo está no arquivo time.txt\n");
 	printf("A visão dos graficos pode ser feita digitando o comando:\n");
 	printf("gcc gnuplot_graph.c -o gnuplot_graph\n./gnuplot_graph\n");
+	printf("Será aberto 3 graficos, O grafico do DFS, grafico do Khan, e os dois juntos\n");
 
    	fprintf(time_report,"Como é possivel perceber, o algoritmo de ordenação topológica por DFS possui um desempenho muito melhor do que o algoritmo de Kahn, no grafo com 100 vértices já é possível perceber uma grande diferença no tempo de execução entre os dois. Portanto o algoritmo de Kahn talvez só seja recomendado para o caso que o grafo possui 10 vértices.\n");
    	fprintf(time_report,"Quando o grafo é pequeno a diferença é desprezível, porém a medida que o número de vértices aumenta, percebemos a mudança no desempenho das ordenações.\n");
