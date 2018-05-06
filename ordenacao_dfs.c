@@ -37,9 +37,13 @@ NODE *pop(PILHA *pilha) {
 
 /* Faz a ordenação topológica do grafo recebido */
 void ordenacao_dfs(GRAFO grafo, FILE *ordenacao_file) {
-	int *vetor_status, i, id_aux, count, j;
+	clock_t start_t, end_t, total_t;
+	int *vetor_status, i, id_aux, count, j, count_chart=0;
 	NODE *node;
 	PILHA p, resultado;
+	FILE *arq;
+
+	arq = fopen("data_dfs.txt", "w");
 
 	/*0 = não visitado, 1 = empilhado*/
 	vetor_status = malloc (grafo.nvertices * sizeof (int));
@@ -50,6 +54,8 @@ void ordenacao_dfs(GRAFO grafo, FILE *ordenacao_file) {
 
 	inicia_pilha(&p);
 	inicia_pilha(&resultado);
+
+	start_t = clock(); /*inicia a contagem*/
 
 	for(i=0;i<grafo.nvertices;i++) {
 		if (vetor_status[i] == 0) {
@@ -69,6 +75,12 @@ void ordenacao_dfs(GRAFO grafo, FILE *ordenacao_file) {
 				if (count == 0) {
 					node = pop(&p);
 					push(&resultado, node->vertex);
+
+					/*Bloco para gravar o tempo em um arquivo*/
+					count_chart++;
+					end_t = clock();
+					total_t = (end_t - start_t);
+			   		fprintf(arq,"%d\t%ld\n", count_chart, total_t);
 				}
 			}
 		}
@@ -80,5 +92,5 @@ void ordenacao_dfs(GRAFO grafo, FILE *ordenacao_file) {
 	}
 	fprintf(ordenacao_file, "\n");
 	
-
+	fclose(arq);
 }

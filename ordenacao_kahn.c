@@ -76,18 +76,31 @@ void grau_entrada(int *vetor, GRAFO grafo, FILA *S) {
 
 /* Executa a ordenação de Kahn */
 void ordenacao_kahn(GRAFO grafo, FILE *ordenacao_file) {
-	int *vetor_entrada, i, j, id;
+	int *vetor_entrada, i, j, id, count=0;
+	clock_t start_t, end_t, total_t;
 	FILA S;
 	NODE *node;
+	FILE *arq;
+
+	arq = fopen("data_khan.txt", "w");
 
 	inicia_fila(&S);
 
 	vetor_entrada = malloc (grafo.nvertices * sizeof (int));
+
 	grau_entrada(vetor_entrada, grafo, &S);
+
+	start_t = clock(); /*inicia a contagem*/
 
 	while(S.inicio != NULL) {
 		node = desenfilera(&S);
 		fprintf(ordenacao_file, "%d ", node->vertex.id);
+
+		/*Bloco para gravar o tempo em um arquivo*/
+		count++;
+		end_t = clock();
+		total_t = (end_t - start_t);
+   		fprintf(arq,"%d\t%ld\n", count, total_t);
 
 		id = node->vertex.id;
 		for(i=0;i<grafo.vertex[id].degree;i++) {
@@ -99,4 +112,6 @@ void ordenacao_kahn(GRAFO grafo, FILE *ordenacao_file) {
 		}
 	}
 	fprintf(ordenacao_file, "\n");
+
+	fclose(arq);
 }
